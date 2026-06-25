@@ -7,6 +7,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   update-gitops:
     needs: Push Docker Image # Mettre ici le nom de votre job précédent (celui qui push sur GHCR)
