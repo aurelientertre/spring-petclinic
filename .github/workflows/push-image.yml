@@ -53,7 +53,7 @@ jobs:
           docker push ghcr.io/${{ env.OWNER_LOWER }}/spring-petclinic:${{ steps.get_version.outputs.version }}
           docker push ghcr.io/${{ env.OWNER_LOWER }}/spring-petclinic:${{ github.sha }}
           docker push ghcr.io/${{ env.OWNER_LOWER }}/spring-petclinic:latest
-          
+
   update-gitops:
     needs: push # Mettre ici le nom de votre job précédent (celui qui push sur GHCR)
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
       - name: Mettre à jour la version de l'image
         working-directory: ./infra-repo/dev
         run: |
-          kustomize edit set image spring-petclinic=ghcr.io/aurelientertre/spring-petclinic:${{ github.sha }}
+          kustomize edit set image ghcr.io/aurelientertre/spring-petclinic=ghcr.io/aurelientertre/spring-petclinic:${{ github.sha }}
 
       - name: Commit et Push vers le dépôt d'infrastructure
         working-directory: ./infra-repo
